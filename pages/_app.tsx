@@ -47,7 +47,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         queryClient={queryClient}
       >
         <Head>
-          <title>ARC MINT</title>
+          <title>Nads ID</title>
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0"

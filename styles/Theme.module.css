@@ -5,6 +5,7 @@
   align-items: center;
   justify-content: center;
   width: 100vw;
+  height: 98vh;
 }
 
 .previewImage {
@@ -18,15 +19,15 @@
 .mintInfoContainer {
   display: flex;
   gap: 14px;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   width: 100%;
   padding: 0 3px;
   min-height: 45vw;
-  max-width: 42vw;
+  max-width: 92vw;
   gap: 1%;
-  border: 3px solid var(--border-color);
+  /* border: 3px solid var(--border-color); */
   border-radius: 18px;
   margin-bottom: 9px;
 }
@@ -42,16 +43,19 @@
 .description {
   opacity: 0.99;
   font-size: fit-content;
+  width: 74%;
+  line-height: 24px;
 }
 
 .imageSide {
   width: 99%;
-  height: 99%;
+  text-align: left;
+  /* height: 99%; */
 }
 
 .image {
-  image-rendering: pixelated;
-  width: 33%;
+  /* image-rendering: pixelated; */
+  width: 73%;
   border-radius: 12px;
 }
 
@@ -105,16 +109,17 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 .mintAreaLeft {
-  margin-left: 36%;
+  /* margin-left: 36%; */
   opacity: 0.78;
 }
 
 .mintAreaRight {
-  margin-right: 36%;
+  /* margin-right: 36%; */
+  margin-left: 6px;
   opacity: 0.78;
 }
 
@@ -135,17 +140,27 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
-  gap: 6%;
+  justify-content: space-between;
+  gap: 22px;
+  width: 60%;
+  border: 1px solid rgba(175, 175, 175, 0.274);
+  padding: 0 8px;
+  border-radius: 8px;
 }
-
+.joinedQuantity {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  /* justify-content: space-between; */
+}
 .mintContainer {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 9%;
-  margin-top: 9px;
+  /* margin-top: 9px; */
 }
 
 .textInput {
@@ -161,13 +176,14 @@
 
 .quantityControlButton {
   cursor: pointer;
-  width: 42px;
-  height: 42px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
-  font-size: fit-content;
+  /* font-size: fit-content; */
   background-color: transparent;
-  border: 3px solid grey;
+  border: none;
   color: #fff;
+  font-size: 24px;
 }
 
 .quantityControlButton:disabled {
@@ -182,9 +198,16 @@
     gap: 12px;
     max-width: 95vw;
   }
+  .description {
+    width: 99%;
+  }
 
   .infoSide {
     width: 100%;
+    align-items: start;
+  }
+  .quantityContainer {
+    width: 50%;
   }
 
   .imageSide {

@@ -16,7 +16,6 @@ import { useEffect, useMemo, useState } from "react";
 import styles from "../styles/Theme.module.css";
 import { parseIneligibility } from "../utils/parseIneligibility";
 
-
 // new id 5ec9d980533be21c962580687677c0f9
 // new key t0FrTfMOHuPBNQJ0tWoQbi9vabkEcHLRlBpZJPeswtUIsuvt-GKQ68534KwM0pqkkukuiHWGAKyTjlTQoVrDhA
 
@@ -27,13 +26,16 @@ import { parseIneligibility } from "../utils/parseIneligibility";
 const myNftDropContractAddress = "0x49821Be6E632203343C91773BC014836E008BBb9";
 
 const Home: NextPage = () => {
-  const { contract: nftDrop } = useContract(myNftDropContractAddress, 'nft-drop');
+  const { contract: nftDrop } = useContract(
+    myNftDropContractAddress,
+    "nft-drop"
+  );
 
   const address = useAddress();
   const [quantity, setQuantity] = useState(1);
 
   const { data: contractMetadata } = useContractMetadata(nftDrop);
-  console.log(nftDrop, contractMetadata)
+  console.log(nftDrop, contractMetadata);
 
   const claimConditions = useClaimConditions(nftDrop);
 
@@ -230,44 +232,31 @@ const Home: NextPage = () => {
         ) : (
           <>
             <div className={styles.infoSide}>
-              {/* Title of your NFT Collection */}
-              <h1>{contractMetadata?.name}</h1>
-              {/* Description of your NFT Collection */}
-              <p className={styles.description}>
-                {contractMetadata?.description}
-              </p>
-            </div>
-
-            <div className={styles.imageSide}>
               {/* Image Preview of NFTs */}
               <img
                 className={styles.image}
                 src={contractMetadata?.image}
                 alt={`${contractMetadata?.name} preview image`}
               />
-              <div>
-                {/* Powered by thirdweb */}{" "}
-                <a href="https://explorer.monad-devnet.devnet101.com/address/0x49821Be6E632203343C91773BC014836E008BBb9" target="_blank" rel="noreferrer">0x4982...BBb9</a>
-              </div>
+            </div>
 
-              {/* Amount claimed so far */}
-              <div className={styles.mintCompletionArea}>
-                <div className={styles.mintAreaLeft}>
-                  <p>Total Minted</p>
-                </div>
-                <div className={styles.mintAreaRight}>
-                  {claimedSupply && unclaimedSupply ? (
-                    <p>
-                      <b>{numberClaimed}</b>
-                      {" / "}
-                      {numberTotal}
-                    </p>
-                  ) : (
-                    // Show loading state if we're still loading the supply
-                    <p>Loading...</p>
-                  )}
-                </div>
-              </div>
+            <div className={styles.imageSide}>
+              {/* Title of your NFT Collection */}
+              <h1 style={{ fontSize: "50px", margin: "0px" }}>
+                {contractMetadata?.name}
+              </h1>
+              {/* Description of your NFT Collection */}
+              <p className={styles.description}>
+                {/* {contractMetadata?.description} */}
+                Nads are the backbone of the Monad community, Do you love Monad
+                as much as you say you do, 1000 Nads ID cards are live on Monad
+                devnet to commemorate the growth of this ecosytem, pick one
+                while you can, these are bound to go really fast.
+              </p>
+              {/* <div>
+                Powered by thirdweb{" "}
+                <a href="https://explorer.monad-devnet.devnet101.com/address/0x49821Be6E632203343C91773BC014836E008BBb9" target="_blank" rel="noreferrer">0x4982...BBb9</a>
+              </div> */}
 
               {claimConditions.data?.length === 0 ||
               claimConditions.data?.every(
@@ -281,53 +270,77 @@ const Home: NextPage = () => {
                 </div>
               ) : (
                 <>
-                  <p>Quantity</p>
-                  <div className={styles.quantityContainer}>
-                    <button
-                      className={`${styles.quantityControlButton}`}
-                      onClick={() => setQuantity(quantity - 1)}
-                      disabled={quantity <= 1}
-                    >
-                      -
-                    </button>
+                  <p style={{ textDecoration: "underline" }}>Quantity</p>
 
-                    <h4>{quantity}</h4>
-
-                    <button
-                      className={`${styles.quantityControlButton}`}
-                      onClick={() => setQuantity(quantity + 1)}
-                      disabled={quantity >= maxClaimable}
-                    >
-                      +
-                    </button>
-                  </div>
-
-                  <div className={styles.mintContainer}>
-                    {isSoldOut ? (
-                      <div>
-                        <h2>Sold Out</h2>
-                      </div>
-                    ) : (
-                      <Web3Button                      
-                        contractAddress={nftDrop?.getAddress() || ""}
-                        action={(cntr) => cntr.erc721.claim(quantity)}
-                        isDisabled={!canClaim || buttonLoading}
-                        onError={(err) => {
-                          console.error(err);
-                          alert("Error claiming NFTs");
-                        }}
-                        onSuccess={() => {
-                          setQuantity(1);
-                          alert("Successfully claimed NFTs");
-                        }}
+                  <div className={styles.joinedQuantity}>
+                    <div className={styles.quantityContainer}>
+                      <button
+                        className={`${styles.quantityControlButton}`}
+                        onClick={() => setQuantity(quantity - 1)}
+                        disabled={quantity <= 1}
                       >
-                        {buttonLoading ? "Loading..." : buttonText}
-                      </Web3Button>
-                      // <></>
-                    )}
+                        -
+                      </button>
+
+                      <h4 style={{ margin: "0px" }}>{quantity}</h4>
+
+                      <button
+                        className={`${styles.quantityControlButton}`}
+                        onClick={() => setQuantity(quantity + 1)}
+                        disabled={quantity >= maxClaimable}
+                      >
+                        +
+                      </button>
+                    </div>
+
+                    <div className={styles.mintContainer}>
+                      {isSoldOut ? (
+                        <div>
+                          <h2>Sold Out</h2>
+                        </div>
+                      ) : (
+                        <Web3Button
+                          contractAddress={nftDrop?.getAddress() || ""}
+                          action={(cntr) => cntr.erc721.claim(quantity)}
+                          isDisabled={!canClaim || buttonLoading}
+                          onError={(err) => {
+                            console.error(err);
+                            alert(
+                              "There was an error while to claiming this NFT"
+                            );
+                          }}
+                          onSuccess={() => {
+                            setQuantity(1);
+                            alert("Successfully claimed NFTs");
+                          }}
+                        >
+                          {buttonLoading ? "Loading..." : buttonText}
+                        </Web3Button>
+                        // <></>
+                      )}
+                    </div>
                   </div>
                 </>
               )}
+              {/* Amount claimed so far */}
+              <div className={styles.mintCompletionArea}>
+                <div className={styles.mintAreaLeft}>
+                  <p>Total Minted : </p>
+                </div>
+                <div className={styles.mintAreaRight}>
+                  {claimedSupply && unclaimedSupply ? (
+                    <p>
+                      {" "}
+                      <b>{numberClaimed}</b>
+                      {" / "}
+                      {numberTotal}
+                    </p>
+                  ) : (
+                    // Show loading state if we're still loading the supply
+                    <p>Loading...</p>
+                  )}
+                </div>
+              </div>
             </div>
           </>
         )}
